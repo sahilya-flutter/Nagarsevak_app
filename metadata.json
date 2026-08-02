@@ -1,0 +1,6 @@
+{
+  "name": "Nagarsevak Civic Governance App",
+  "description": "A Flutter Material 3 inspired civic governance and complaint tracking application for citizens and administrators in Marathi.",
+  "requestFramePermissions": ["camera", "geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
