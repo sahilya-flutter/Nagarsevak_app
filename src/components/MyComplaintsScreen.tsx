@@ -47,7 +47,7 @@ export const MyComplaintsScreen: React.FC<MyComplaintsScreenProps> = ({
   });
 
   return (
-    <div className="pb-24 pt-2 px-4 max-w-md mx-auto space-y-5">
+    <div className="w-full max-w-xl mx-auto pb-28 pt-2 px-3 sm:px-4 space-y-5 overflow-x-hidden">
       {/* Top App Bar */}
       <div className="bg-[#F7F2FA]/90 backdrop-blur-xl sticky top-0 z-30 flex justify-between items-center py-3 px-1 border-b border-[#CAC4D0]">
         <div className="flex items-center gap-2.5">

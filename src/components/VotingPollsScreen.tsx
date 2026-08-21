@@ -31,7 +31,7 @@ export const VotingPollsScreen: React.FC<VotingPollsScreenProps> = ({ polls, onV
   };
 
   return (
-    <div className="pb-24 pt-2 px-4 max-w-md mx-auto space-y-5">
+    <div className="w-full max-w-xl mx-auto pb-28 pt-2 px-3 sm:px-4 space-y-5 overflow-x-hidden">
       <div className="bg-[#F7F2FA]/90 backdrop-blur-xl sticky top-0 z-30 flex justify-between items-center py-3 border-b border-[#CAC4D0]">
         <div className="flex items-center gap-2.5">
           <div className="w-10 h-10 bg-[#FFEDD5] rounded-2xl flex items-center justify-center text-[#9A3412] border border-[#FDBA74]/50">

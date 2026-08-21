@@ -1,0 +1,29 @@
+{
+  "short_name": "नगरसेवक",
+  "name": "नगरसेवक (Nagarsevak) - नागरिक जनसेवा ॲप",
+  "description": "नगरसेवक नागरिक तक्रार निवारण व प्रभाग जनसेवा प्लॅटफॉर्म",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512 192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "pwa-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "pwa-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0f172a",
+  "theme_color": "#2563eb",
+  "display": "standalone",
+  "orientation": "portrait",
+  "categories": ["civic", "government", "utilities"]
+}

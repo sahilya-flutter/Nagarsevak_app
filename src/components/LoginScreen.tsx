@@ -53,8 +53,8 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
   };
 
   return (
-    <div className="min-h-[calc(100vh-100px)] flex flex-col items-center justify-center p-4 bg-[#F3F4F9]">
-      <main className="w-full max-w-md bg-[#F7F2FA] rounded-3xl shadow-sm border border-[#CAC4D0] overflow-hidden my-2 transition-all">
+    <div className="min-h-screen flex flex-col items-center justify-start p-3 bg-[#F3F4F9] pt-6">
+      <main className="w-full max-w-xl bg-[#F7F2FA] rounded-3xl shadow-sm border border-[#CAC4D0] overflow-hidden mb-6 transition-all">
         {/* Header Section with Leader Banner */}
         <div className="p-3 pb-2 bg-[#FFEDD5]/40 border-b border-[#FDBA74]/40">
           <LeaderBanner />

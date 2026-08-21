@@ -51,7 +51,10 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-[#F7F2FA]/95 backdrop-blur-xl border-t border-[#CAC4D0] shadow-md rounded-t-3xl px-3 py-2 flex justify-around items-center max-w-md mx-auto">
+    <nav
+      className="w-full bg-[#F7F2FA]/98 backdrop-blur-xl border-t border-[#CAC4D0] shadow-lg flex justify-around items-stretch bottom-nav-safe shrink-0"
+      style={{ paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 8px)' }}
+    >
       {navItems.map((item) => {
         const isActive = item.activeScreens.includes(activeScreen);
 
@@ -59,24 +62,26 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({
           <button
             key={item.id}
             onClick={() => setActiveScreen(item.id)}
-            className={`flex flex-col items-center justify-center py-1 px-3 rounded-full transition-all duration-200 relative ${
-              isActive
-                ? 'bg-[#FFEDD5] text-[#9A3412] font-bold scale-100 border border-[#FDBA74]/50'
-                : 'text-[#49454F] hover:text-[#1C1B1F] hover:bg-[#FFEDD5]/40'
+            className={`flex flex-col items-center justify-center flex-1 py-2 px-1 transition-all duration-150 relative min-h-[56px] ${
+              isActive ? 'text-[#9A3412]' : 'text-[#49454F]'
             }`}
           >
-            <div className="relative flex items-center justify-center w-12 h-7 rounded-full transition-colors">
+            {/* Pill indicator */}
+            {isActive && (
+              <span className="absolute top-1 left-1/2 -translate-x-1/2 w-12 h-7 bg-[#FFEDD5] rounded-full border border-[#FDBA74]/50 -z-0" />
+            )}
+            <div className="relative flex items-center justify-center w-12 h-7 z-10">
               <span
-                className={`material-symbols-outlined ${isActive ? 'fill text-[#9A3412]' : 'text-[#49454F]'}`}
+                className={`material-symbols-outlined ${isActive ? 'fill' : ''}`}
                 style={{ fontSize: '22px' }}
               >
                 {item.icon}
               </span>
               {item.badge && (
-                <span className="absolute top-0 right-2 w-2.5 h-2.5 bg-[#B3261E] rounded-full ring-2 ring-white animate-pulse" />
+                <span className="absolute top-0 right-1.5 w-2 h-2 bg-[#B3261E] rounded-full ring-1 ring-white animate-pulse" />
               )}
             </div>
-            <span className={`text-[11px] leading-tight mt-0.5 ${isActive ? 'font-bold text-[#9A3412]' : 'font-medium text-[#49454F]'}`}>
+            <span className={`text-[10px] leading-tight mt-0.5 z-10 ${isActive ? 'font-bold' : 'font-medium'}`}>
               {item.labelMr}
             </span>
           </button>
@@ -85,3 +90,4 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({
     </nav>
   );
 };
+

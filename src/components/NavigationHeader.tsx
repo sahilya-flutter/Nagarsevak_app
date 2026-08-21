@@ -33,8 +33,19 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({
           </span>
         </div>
 
-        {/* Device Frame & Role Toggles */}
-        <div className="flex items-center gap-3">
+        {/* Device Frame, Mobile App Install & Role Toggles */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          <button
+            onClick={() => {
+              const modal = document.getElementById('mobile-app-install-modal');
+              if (modal) modal.classList.remove('hidden');
+            }}
+            className="flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-full text-xs shadow-md transition-all animate-pulse"
+          >
+            <span className="material-symbols-outlined text-sm">install_mobile</span>
+            <span>मोबाईल ॲप</span>
+          </button>
+
           <div className="flex items-center bg-[#313033] rounded-full p-1 border border-[#49454F]">
             <button
               onClick={() => setUserRole('citizen')}
@@ -157,6 +168,77 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({
         >
           ✅ यशस्वी पडताळणी
         </button>
+      </div>
+
+      {/* Mobile App Installation Guide Modal */}
+      <div
+        id="mobile-app-install-modal"
+        className="hidden fixed inset-0 z-[999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
+      >
+        <div className="bg-slate-900 border border-slate-700 text-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative animate-in fade-in zoom-in duration-200">
+          <button
+            onClick={() => {
+              const modal = document.getElementById('mobile-app-install-modal');
+              if (modal) modal.classList.add('hidden');
+            }}
+            className="absolute top-4 right-4 text-slate-400 hover:text-white p-2 rounded-full hover:bg-slate-800"
+          >
+            <span className="material-symbols-outlined">close</span>
+          </button>
+
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white text-2xl shadow-lg">
+              <span className="material-symbols-outlined">phone_iphone</span>
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-white">नगरसेवक मोबाईल ॲप इन्स्टॉलेशन</h3>
+              <p className="text-xs text-slate-400">Mobile App & APK Build Ready</p>
+            </div>
+          </div>
+
+          <div className="space-y-4 text-sm text-slate-300">
+            <div className="p-4 bg-slate-800/80 rounded-2xl border border-slate-700">
+              <h4 className="font-bold text-amber-400 flex items-center gap-2 mb-1">
+                <span className="material-symbols-outlined text-base">download</span>
+                १. Android / iOS वर PWA म्हणून वापरा (झटपट ॲप):
+              </h4>
+              <ol className="list-decimal list-inside text-xs space-y-1 text-slate-300 ml-1">
+                <li>मोबाईल ब्राऊजरमध्ये ही लिंक उघडा.</li>
+                <li>ब्राऊजरच्या <b>Menu (⋮ किंवा Share)</b> वर क्लिक करा.</li>
+                <li><b>"Add to Home screen" (होम स्क्रीनवर जोडा)</b> हा पर्याय निवडा.</li>
+                <li>तुमच्या फोनवर नगरसेवक ॲपचा आयकॉन तयार होईल व Native Mobile App प्रमाणे चालेल!</li>
+              </ol>
+            </div>
+
+            <div className="p-4 bg-slate-800/80 rounded-2xl border border-slate-700">
+              <h4 className="font-bold text-blue-400 flex items-center gap-2 mb-1">
+                <span className="material-symbols-outlined text-base">android</span>
+                २. Native Android APK तयार करणे (Capacitor):
+              </h4>
+              <p className="text-xs text-slate-300 mb-2">
+                हा प्रकल्प Capacitor व Android CLI द्वारे APK बिल्ड करण्यासाठी सज्ज आहे:
+              </p>
+              <pre className="bg-slate-950 p-2.5 rounded-xl text-[11px] font-mono text-emerald-400 overflow-x-auto border border-slate-800">
+{`npm run build
+npx cap add android
+npx cap sync
+npx cap open android`}
+              </pre>
+            </div>
+          </div>
+
+          <div className="mt-6 flex justify-end">
+            <button
+              onClick={() => {
+                const modal = document.getElementById('mobile-app-install-modal');
+                if (modal) modal.classList.add('hidden');
+              }}
+              className="px-5 py-2 bg-blue-600 hover:bg-blue-500 font-bold rounded-xl text-xs text-white"
+            >
+              समजले (Got it)
+            </button>
+          </div>
+        </div>
       </div>
     </header>
   );

@@ -33,7 +33,7 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
   };
 
   return (
-    <div className="pb-24 pt-2 px-4 max-w-md mx-auto space-y-6">
+    <div className="w-full max-w-xl mx-auto pb-24 pt-0 px-3 space-y-5 overflow-x-hidden">
       {/* Toast Notification */}
       {showShareToast && (
         <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white px-4 py-2 rounded-full text-xs font-semibold shadow-lg flex items-center gap-2 animate-bounce">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Complaint,
   Member,
@@ -423,8 +423,45 @@ export default function App() {
   const hideBottomNav =
     activeScreen === 'login' || activeScreen === 'verification_success';
 
+  // Safely detect native Capacitor app environment
+  const [isNativeApp, setIsNativeApp] = useState<boolean>(false);
+  useEffect(() => {
+    try {
+      const cap = (window as any).Capacitor;
+      const isNative = Boolean(cap && cap.isNativePlatform && cap.isNativePlatform());
+      setIsNativeApp(isNative);
+    } catch {
+      setIsNativeApp(false);
+    }
+  }, []);
+
+  // On native app: show clean full-screen layout without dev header
+  if (isNativeApp) {
+    return (
+      <div
+        className="flex flex-col w-full bg-[#F3F4F9]"
+        style={{ height: '100dvh', overflow: 'hidden' }}
+      >
+        {/* Status bar safe area spacer - pushes content below notch */}
+        <div style={{ height: 'env(safe-area-inset-top, 24px)', background: '#F7F2FA', flexShrink: 0 }} />
+        <main className="screen-scroll no-scrollbar" style={{ flex: 1 }}>
+          {renderScreen()}
+        </main>
+        {!hideBottomNav && (
+          <BottomNavBar
+            activeScreen={activeScreen}
+            setActiveScreen={setActiveScreen}
+            userRole={userRole}
+            unreadNotificationsCount={unreadCount}
+          />
+        )}
+      </div>
+    );
+  }
+
+
   return (
-    <div className="min-h-screen bg-slate-900 font-sans text-slate-900 flex flex-col">
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 flex flex-col relative overflow-x-hidden w-full">
       {/* Dev Bar & Screen Switcher */}
       <NavigationHeader
         activeScreen={activeScreen}
@@ -437,31 +474,11 @@ export default function App() {
       />
 
       {/* Main Stage View */}
-      <main className="flex-1 flex justify-center items-start p-0 md:p-6 overflow-x-hidden">
+      <main className="flex-1 flex flex-col w-full overflow-x-hidden">
         {isMobileFrame ? (
-          /* Flutter Pixel/Material 3 Device Simulator Frame */
-          <div className="w-full max-w-md bg-white min-h-[840px] md:rounded-[44px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] border-0 md:border-[10px] border-slate-800 relative flex flex-col overflow-hidden my-0 md:my-2">
-            {/* Phone Speaker / Camera Notch */}
-            <div className="hidden md:flex justify-center pt-2 pb-1 bg-white z-50">
-              <div className="w-28 h-4 bg-slate-800 rounded-full flex items-center justify-end px-3">
-                <div className="w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-700" />
-              </div>
-            </div>
-
-            {/* Mobile Status Bar */}
-            <div className="px-5 pt-1 pb-1 text-slate-800 flex justify-between items-center text-[11px] font-bold z-40 bg-white/90 backdrop-blur-xs select-none">
-              <span>09:41</span>
-              <div className="flex items-center gap-1.5 text-xs">
-                <span className="material-symbols-outlined text-sm">signal_cellular_4_bar</span>
-                <span className="material-symbols-outlined text-sm">wifi</span>
-                <span className="material-symbols-outlined text-sm">battery_full</span>
-              </div>
-            </div>
-
-            {/* Screen Content */}
+          /* Mobile Simulator Frame */
+          <div className="w-full max-w-md bg-slate-50 min-h-[840px] md:rounded-[36px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] border-0 md:border-[8px] border-slate-800 relative flex flex-col overflow-hidden my-2 mx-auto">
             <div className="flex-1 overflow-y-auto relative">{renderScreen()}</div>
-
-            {/* Bottom Navigation */}
             {!hideBottomNav && (
               <BottomNavBar
                 activeScreen={activeScreen}
@@ -470,15 +487,10 @@ export default function App() {
                 unreadNotificationsCount={unreadCount}
               />
             )}
-
-            {/* Home Bar Indicator */}
-            <div className="hidden md:flex justify-center pb-2 pt-1 bg-white z-50">
-              <div className="w-32 h-1 bg-slate-300 rounded-full" />
-            </div>
           </div>
         ) : (
-          /* Full Screen Responsive Web Container */
-          <div className="w-full max-w-4xl bg-slate-50 min-h-screen shadow-xl rounded-2xl overflow-hidden relative border border-slate-200">
+          /* Full Width Desktop View */
+          <div className="w-full max-w-5xl mx-auto bg-slate-50 min-h-screen shadow-xl rounded-2xl overflow-hidden relative border border-slate-200 my-4">
             <div className="p-4">{renderScreen()}</div>
             {!hideBottomNav && (
               <BottomNavBar

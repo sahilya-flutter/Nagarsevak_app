@@ -15,8 +15,8 @@ export const VerificationSuccessScreen: React.FC<VerificationSuccessScreenProps>
   }, [onProceed]);
 
   return (
-    <div className="min-h-[calc(100vh-100px)] flex flex-col items-center justify-center p-4 bg-[#F7F2FA]">
-      <main className="w-full max-w-md bg-white rounded-3xl p-6 sm:p-8 text-center shadow-xs border border-[#CAC4D0] my-4 animate-fade-in">
+    <div className="min-h-screen flex flex-col items-center justify-center p-3 sm:p-4 bg-[#F7F2FA]">
+      <main className="w-full max-w-xl bg-white rounded-3xl p-6 sm:p-8 text-center shadow-xs border border-[#CAC4D0] my-4 animate-fade-in">
         {/* Brand Header */}
         <div className="flex flex-col items-center mb-6">
           <div className="flex items-center gap-2 mb-1">

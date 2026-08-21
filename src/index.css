@@ -1,13 +1,43 @@
 @import "tailwindcss";
 
 @layer base {
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
-    font-family: 'Roboto', 'Noto Sans', sans-serif;
+    font-family: 'Noto Sans Devanagari', 'Noto Sans', 'Roboto', sans-serif;
     background-color: #F3F4F9;
     color: #1C1B1F;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  #root {
+    height: 100%;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  * {
+    -webkit-user-select: none;
+    user-select: none;
+    box-sizing: border-box;
+  }
+
+  input, textarea {
+    -webkit-user-select: text;
+    user-select: text;
   }
 }
 
+/* Material Icons */
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined';
   font-weight: normal;
@@ -28,6 +58,7 @@
   font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
+/* Scrollbar hide */
 .no-scrollbar::-webkit-scrollbar,
 .custom-scroll-hide::-webkit-scrollbar {
   display: none;
@@ -39,7 +70,7 @@
   scrollbar-width: none;
 }
 
-/* Material 3 High Density card styles */
+/* Material 3 card */
 .m3-card {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -48,11 +79,11 @@
   transform: scale(0.98);
 }
 
-/* High Density Donut Chart styling with Saffron palette */
+/* Donut Chart */
 .pie-chart {
   background: conic-gradient(
-    #EA580C 0% 30%, 
-    #FFEDD5 30% 55%, 
+    #EA580C 0% 30%,
+    #FFEDD5 30% 55%,
     #FDBA74 55% 80%,
     #313033 80% 100%
   );
@@ -61,6 +92,17 @@
   height: 120px;
 }
 
+/* Screen scroll with space for bottom nav */
+.screen-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  padding-bottom: 80px;
+}
+
+/* Progress bar animation */
 @keyframes progressAnim {
   0% { width: 0%; }
   100% { width: 100%; }
@@ -69,5 +111,3 @@
 .animate-progress {
   animation: progressAnim 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
-
-
